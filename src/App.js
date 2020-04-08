@@ -11,7 +11,6 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/:id" component={BookPage} />
-                    </>
                 </Switch>
             </MainWrapper>
         </Router>
