@@ -18,7 +18,7 @@ const HomePage = props => {
     const { comics, loading } = props;
     const [value, setValue] = useState("");
     const [criteria, setCriteria] = useState("year");
-    const [obj, setObj] = useState({
+    const [buttonStyle, setButtonStyle] = useState({
         year: true,
         writer: false,
         artist: false,
@@ -36,7 +36,7 @@ const HomePage = props => {
         if (e.target.tagName.toLowerCase() === "button") {
             setCriteria(e.target.innerText.toLowerCase());
         }
-        setObj({ [e.target.innerText.toLowerCase()]: true });
+        setButtonStyle({ [e.target.innerText.toLowerCase()]: true });
     };
 
     const handleInputChange = e => {
@@ -62,11 +62,11 @@ const HomePage = props => {
                 />
 
                 <ButtonWrapper onClick={handleButtonClick}>
-                    <Button prop={obj.year}>Year</Button>
-                    <Button prop={obj.writer}>Writer</Button>
-                    <Button prop={obj.artist}>Artist</Button>
-                    <Button prop={obj.owner}>Owner</Button>
-                    <Button prop={obj.random}>Random</Button>
+                    <Button prop={buttonStyle.year}>Year</Button>
+                    <Button prop={buttonStyle.writer}>Writer</Button>
+                    <Button prop={buttonStyle.artist}>Artist</Button>
+                    <Button prop={buttonStyle.owner}>Owner</Button>
+                    <Button prop={buttonStyle.random}>Random</Button>
                 </ButtonWrapper>
 
                 {loading ? (
