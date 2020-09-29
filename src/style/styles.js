@@ -215,7 +215,7 @@ export const DescriptionWrapper = styled.div`
 
 export const PendingWrapper = styled.div`
     font-size: 22px;
-    padding-top: 1em;
+    padding-top: 2em;
 
     @media ${device.tablet} {
         font-size: 16px;

@@ -12,6 +12,7 @@ import { requestApiData } from "../actions";
 import RenderData from "./RenderData";
 import Header from "./Header";
 import { shuffleArray, sortArrayByCriteria } from "./utils";
+import PlaceholderGrid from "./PlaceholderGrid";
 
 const HomePage = props => {
     const { comics, loading } = props;
@@ -69,7 +70,13 @@ const HomePage = props => {
                 </ButtonWrapper>
 
                 {loading ? (
-                    <PendingWrapper>Loading...</PendingWrapper>
+                    <PendingWrapper>
+                        {Array(10)
+                            .fill(1)
+                            .map(_item => {
+                                return <PlaceholderGrid />;
+                            })}
+                    </PendingWrapper>
                 ) : (
                     <RenderData
                         comics={handlePass(comics)}
