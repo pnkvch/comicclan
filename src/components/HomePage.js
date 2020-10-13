@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, connect } from "react-redux";
 import {
     Button,
@@ -13,6 +13,7 @@ import RenderData from "./RenderData";
 import Header from "./Header";
 import { shuffleArray, sortArrayByCriteria } from "./utils";
 import PlaceholderGrid from "./PlaceholderGrid";
+import { useDebounceEffect } from "./useDebounceEffect";
 
 const HomePage = props => {
     const { comics, loading } = props;
@@ -28,9 +29,10 @@ const HomePage = props => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(requestApiData());
-    }, [dispatch]);
+    useDebounceEffect(() => {
+        dispatch(requestApiData(value));
+        console.log(`dispatched ${value}`);
+    }, [value]);
 
     const handleButtonClick = e => {
         if (e.target.tagName.toLowerCase() === "button") {
@@ -41,7 +43,6 @@ const HomePage = props => {
 
     const handleInputChange = e => {
         setValue(e.target.value);
-        dispatch(requestApiData(e.target.value));
     };
 
     const handlePass = arr => {
@@ -73,8 +74,8 @@ const HomePage = props => {
                     <PendingWrapper>
                         {Array(10)
                             .fill(1)
-                            .map(_item => {
-                                return <PlaceholderGrid />;
+                            .map((_item, index) => {
+                                return <PlaceholderGrid key={index} />;
                             })}
                     </PendingWrapper>
                 ) : (
