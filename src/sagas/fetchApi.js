@@ -1,7 +1,5 @@
 async function fetchApi(query) {
-    const url = query
-        ? `https://comicclan.vett.io/comics?q=${query}`
-        : `https://comicclan.vett.io/comics`;
+    const url = "https://api.shortboxed.com/comics/v1/new";
     try {
         const response = await fetch(url, {
             headers: {
@@ -9,7 +7,9 @@ async function fetchApi(query) {
             }
         }).then(x => x.json());
 
-        return response;
+        console.log(response.comics);
+
+        return response.comics;
     } catch (e) {
         console.log(e);
     }

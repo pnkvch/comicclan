@@ -11,6 +11,7 @@ const primaryFontSize = "1em";
 export const Wrapper = styled.div`
     width: 95%;
     margin: auto;
+    margin-top: 4.5em;
 
     h2 {
         color: #cccccc;
@@ -28,6 +29,10 @@ export const HeaderWrapper = styled.header`
     background-color: ${headerBackgroundColor};
     padding: 1em;
     padding-left: 2.5%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
     @media ${device.tablet} {
         padding-left: 3%;
     }
@@ -93,6 +98,10 @@ export const ListWrapper = styled.div`
         text-decoration: none;
         max-width: 225px;
         margin-right: 2em;
+    }
+
+    img {
+        width: 100%;
     }
 `;
 
@@ -220,4 +229,13 @@ export const PendingWrapper = styled.div`
     @media ${device.tablet} {
         font-size: 16px;
     }
+`;
+
+export const ProgressBarWrapper = styled.div`
+    position: fixed;
+    height: 3px;
+    background-color: #cccccc;
+    width: ${props => props.scroll};
+    z-index: 1;
+    top: 63px;
 `;

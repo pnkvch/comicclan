@@ -14,11 +14,12 @@ import Header from "./Header";
 import { shuffleArray, sortArrayByCriteria } from "./utils";
 import PlaceholderGrid from "./PlaceholderGrid";
 import { useDebounceEffect } from "./useDebounceEffect";
+import ProgressBar from "./ProgressBar";
 
 const HomePage = props => {
     const { comics, loading } = props;
     const [value, setValue] = useState("");
-    const [criteria, setCriteria] = useState("year");
+    const [criteria, setCriteria] = useState("publisher");
     const [buttonStyle, setButtonStyle] = useState({
         year: true,
         writer: false,
@@ -54,6 +55,7 @@ const HomePage = props => {
     return (
         <HomeWrapper>
             <Header />
+            <ProgressBar />
             <Wrapper>
                 <InputWrapper
                     type="search"

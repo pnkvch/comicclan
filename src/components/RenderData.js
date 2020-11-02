@@ -65,7 +65,7 @@ const RenderData = props => {
                             <Link
                                 key={index}
                                 to={{
-                                    pathname: `${x.name
+                                    pathname: `${x.title
                                         .replace(/ /g, "-")
                                         .toLowerCase()}`,
                                     state: x
