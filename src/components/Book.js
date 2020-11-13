@@ -2,12 +2,13 @@ import React from "react";
 import { BookWrapper } from "../style/styles";
 
 const Book = props => {
-    const { image, name, owner } = props;
+    const { image, title, owner } = props;
+    const { extension, path } = image;
 
     return (
         <BookWrapper>
-            <img src={image} alt="" />
-            <h3>{name}</h3>
+            <img src={`${path}.${extension}`} alt="" />
+            <h3>{title}</h3>
             <p>
                 Owned By <span>{owner}</span>
             </p>

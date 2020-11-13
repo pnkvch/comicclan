@@ -21,15 +21,13 @@ const RenderData = props => {
                         <Link
                             key={index}
                             to={{
-                                pathname: `${x.name
-                                    .replace(/ /g, "-")
-                                    .toLowerCase()}`,
+                                pathname: `${x.id}`,
                                 state: x
                             }}
                         >
                             <Book
-                                image={x.image}
-                                name={x.name}
+                                image={x.thumbnail}
+                                title={x.title}
                                 owner={x.owner}
                             />
                         </Link>
@@ -65,15 +63,13 @@ const RenderData = props => {
                             <Link
                                 key={index}
                                 to={{
-                                    pathname: `${x.title
-                                        .replace(/ /g, "-")
-                                        .toLowerCase()}`,
+                                    pathname: `${x.id}`,
                                     state: x
                                 }}
                             >
                                 <Book
-                                    image={x.image}
-                                    name={x.name}
+                                    image={x.thumbnail}
+                                    title={x.title}
                                     owner={x.owner}
                                 />
                             </Link>

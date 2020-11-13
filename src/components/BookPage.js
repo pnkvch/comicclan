@@ -45,14 +45,15 @@ const BookPage = props => {
 
                 <BookPageWrapper>
                     <PrimaryImageWrapper>
-                        <img src={state.image} alt="book" />
+                        <img
+                            src={`${state.thumbnail.path}.${state.thumbnail.extension}`}
+                            alt="book"
+                        />
                     </PrimaryImageWrapper>
 
                     <InfoWrapper>
                         <div>
-                            <h2>
-                                {state.name} ({state.year})
-                            </h2>
+                            <h2>{state.title}</h2>
 
                             <div>
                                 {rating.map((x, i) =>
@@ -127,16 +128,14 @@ const BookPage = props => {
                             <Link
                                 key={i}
                                 to={{
-                                    pathname: `${x.name
-                                        .replace(/ /g, "-")
-                                        .toLowerCase()}`,
+                                    pathname: `${x.id}`,
                                     state: x
                                 }}
                             >
                                 <Book
-                                    name={x.name}
+                                    image={x.thumbnail}
+                                    title={x.title}
                                     owner={x.owner}
-                                    image={x.image}
                                 />
                             </Link>
                         );

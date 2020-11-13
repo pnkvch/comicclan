@@ -19,7 +19,7 @@ import ProgressBar from "./ProgressBar";
 const HomePage = props => {
     const { comics, loading } = props;
     const [value, setValue] = useState("");
-    const [criteria, setCriteria] = useState("publisher");
+    const [criteria, setCriteria] = useState("startYear");
     const [buttonStyle, setButtonStyle] = useState({
         year: true,
         writer: false,
@@ -65,7 +65,7 @@ const HomePage = props => {
                 />
 
                 <ButtonWrapper onClick={handleButtonClick}>
-                    <Button prop={buttonStyle.year}>Year</Button>
+                    <Button prop={buttonStyle.year}>startYear</Button>
                     <Button prop={buttonStyle.writer}>Writer</Button>
                     <Button prop={buttonStyle.artist}>Artist</Button>
                     <Button prop={buttonStyle.owner}>Owner</Button>
