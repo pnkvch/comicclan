@@ -1,19 +1,11 @@
-import md5 from "md5";
-
-const { REACT_APP_PRIVATE_API_KEY, REACT_APP_PUBLIC_API_KEY } = process.env;
-
-async function fetchApi(query) {
-    const baseUrl = "https://gateway.marvel.com/v1/public/series";
-    const timestamp = new Date().getTime();
-    const hash = md5(
-        timestamp + REACT_APP_PRIVATE_API_KEY + REACT_APP_PUBLIC_API_KEY
-    );
-    const auth = `?ts=${timestamp}&apikey=${REACT_APP_PUBLIC_API_KEY}&hash=${hash}`;
-    const url = query ? `${baseUrl}?${query}${auth}` : `${baseUrl}${auth}`;
+export async function fetchData(query) {
+    const url = query
+        ? `https://api.itbook.store/1.0/search/${query}`
+        : "https://api.itbook.store/1.0/new";
 
     try {
         const response = await fetch(url).then(x => x.json());
-        const results = response.data.results;
+        const results = response.books;
 
         console.log(results);
 
@@ -23,4 +15,16 @@ async function fetchApi(query) {
     }
 }
 
-export default fetchApi;
+export async function fetchBookData(query) {
+    const url = `https://api.itbook.store/1.0/books/${query}`;
+
+    try {
+        const response = await fetch(url).then(x => x.json());
+        const results = response;
+        console.log(results);
+
+        return results;
+    } catch (e) {
+        console.log(e);
+    }
+}

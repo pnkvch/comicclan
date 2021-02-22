@@ -1,12 +1,12 @@
 import React from "react";
-import { ListWrapper, PendingWrapper } from "../style/styles";
-import { Link } from "react-router-dom";
-import Book from "./Book";
-import { getUniqueValues } from "./utils";
+import { PendingWrapper } from "../style/styles";
+import { filterPlainArray, getUniqueValues } from "./utils";
+import BooksSlider from "./BooksSlider";
 
 const RenderData = props => {
     const { comics, criteria } = props;
     const unique = getUniqueValues(comics, criteria);
+    let heading, filters, filteredArray;
 
     if (!comics.length) {
         return <PendingWrapper>There is no match</PendingWrapper>;
@@ -16,69 +16,26 @@ const RenderData = props => {
         return (
             <>
                 <h2>Random Books</h2>
-                <ListWrapper>
-                    {comics.map((x, index) => (
-                        <Link
-                            key={index}
-                            to={{
-                                pathname: `${x.id}`,
-                                state: x
-                            }}
-                        >
-                            <Book
-                                image={x.thumbnail}
-                                title={x.title}
-                                owner={x.owner}
-                            />
-                        </Link>
-                    ))}
-                </ListWrapper>
+                <BooksSlider comics={comics} />
             </>
         );
-    } else {
-        return unique.map((item, index) => {
-            let filters = {
-                [criteria]: [item]
-            };
-
-            const filterPlainArray = (array, filters) => {
-                const filterKeys = Object.keys(filters);
-                return array.filter(item => {
-                    return filterKeys.every(key => {
-                        if (!filters[key].length) return true;
-                        return filters[key].find(
-                            filter => filter === item[key]
-                        );
-                    });
-                });
-            };
-
-            let filteredArray = filterPlainArray(comics, filters);
-
-            return (
-                <div key={index}>
-                    <h2>{filteredArray[0][criteria]}</h2>
-                    <ListWrapper>
-                        {filteredArray.map((x, index) => (
-                            <Link
-                                key={index}
-                                to={{
-                                    pathname: `${x.id}`,
-                                    state: x
-                                }}
-                            >
-                                <Book
-                                    image={x.thumbnail}
-                                    title={x.title}
-                                    owner={x.owner}
-                                />
-                            </Link>
-                        ))}
-                    </ListWrapper>
-                </div>
-            );
-        });
     }
+
+    return unique.map((item, index) => {
+        filters = {
+            [criteria]: [item]
+        };
+
+        filteredArray = filterPlainArray(comics, filters);
+        heading = filteredArray[0][criteria];
+
+        return (
+            <div key={index}>
+                <h2>{heading}</h2>
+                <BooksSlider comics={filteredArray} />
+            </div>
+        );
+    });
 };
 
 export default RenderData;

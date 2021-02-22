@@ -25,3 +25,13 @@ export const getUniqueValues = (arr, criteria) => {
 
     return unique;
 };
+
+export const filterPlainArray = (array, filters) => {
+    const filterKeys = Object.keys(filters);
+    return array.filter(item => {
+        return filterKeys.every(key => {
+            if (!filters[key].length) return true;
+            return filters[key].find(filter => filter === item[key]);
+        });
+    });
+};

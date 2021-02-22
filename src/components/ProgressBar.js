@@ -28,13 +28,17 @@ const ProgressBar = () => {
     };
 
     const listenToScrollEvent = () => {
-        document.addEventListener("scroll", () => {
-            calculateScrollDistance();
-        });
+        document.addEventListener("scroll", calculateScrollDistance);
+    };
+
+    const cancelListenToScrollEvent = () => {
+        document.removeEventListener("scroll", calculateScrollDistance);
     };
 
     useEffect(() => {
         listenToScrollEvent();
+
+        return () => cancelListenToScrollEvent();
     });
 
     return <ProgressBarWrapper scroll={`${scroll}%`} />;

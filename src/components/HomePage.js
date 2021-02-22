@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     Button,
     ButtonWrapper,
@@ -9,17 +9,18 @@ import {
     PendingWrapper
 } from "../style/styles";
 import { requestApiData } from "../actions";
+import { shuffleArray, sortArrayByCriteria } from "./utils";
+import { useDebounceEffect } from "./useDebounceEffect";
 import RenderData from "./RenderData";
 import Header from "./Header";
-import { shuffleArray, sortArrayByCriteria } from "./utils";
 import PlaceholderGrid from "./PlaceholderGrid";
-import { useDebounceEffect } from "./useDebounceEffect";
 import ProgressBar from "./ProgressBar";
 
-const HomePage = props => {
-    const { comics, loading } = props;
+const HomePage = () => {
+    const comics = useSelector(state => state.comics);
+    const loading = useSelector(state => state.loading);
     const [value, setValue] = useState("");
-    const [criteria, setCriteria] = useState("startYear");
+    const [criteria, setCriteria] = useState("title");
     const [buttonStyle, setButtonStyle] = useState({
         year: true,
         writer: false,
@@ -65,7 +66,7 @@ const HomePage = props => {
                 />
 
                 <ButtonWrapper onClick={handleButtonClick}>
-                    <Button prop={buttonStyle.year}>startYear</Button>
+                    <Button prop={buttonStyle.year}>Title</Button>
                     <Button prop={buttonStyle.writer}>Writer</Button>
                     <Button prop={buttonStyle.artist}>Artist</Button>
                     <Button prop={buttonStyle.owner}>Owner</Button>
@@ -91,9 +92,4 @@ const HomePage = props => {
     );
 };
 
-const mapStateToProps = state => {
-    const { comics, loading } = state;
-    return { comics, loading };
-};
-
-export default connect(mapStateToProps)(HomePage);
+export default HomePage;

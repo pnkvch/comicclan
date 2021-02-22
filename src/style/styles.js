@@ -231,12 +231,15 @@ export const PendingWrapper = styled.div`
     }
 `;
 
-export const ProgressBarWrapper = styled.div`
+export const ProgressBarWrapper = styled.div.attrs(({ scroll }) => ({
+    style: {
+        width: scroll
+    }
+}))`
     position: fixed;
     height: 3px;
     background-color: #cccccc;
-    width: ${props => props.scroll};
     z-index: 1;
     top: 63px;
-    transition: width 0.2s ease-out;
+    transition: width 0.1s ease-out;
 `;

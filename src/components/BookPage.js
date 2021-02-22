@@ -1,36 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     BookPageWrapper,
     InfoWrapper,
-    ListWrapper,
     Wrapper,
     PrimaryImageWrapper,
     BackToCollection,
-    DescriptionWrapper
+    DescriptionWrapper,
+    PendingWrapper
 } from "../style/styles";
-import EmptyStar from "../images/EmptyStar.svg";
-import FullStar from "../images/FullStar.svg";
+
 import BackIcon from "../images/BackIcon.svg";
 import Header from "./Header";
-import { requestApiData } from "../actions";
-import Book from "./Book";
+import BooksSlider from "./BooksSlider";
+import PlaceholderGrid from "./PlaceholderGrid";
+import { requestApiData, requestBookData } from "../actions";
 import { shuffleArray } from "./utils";
 import { Link } from "react-router-dom";
+import Rating from "./Rating";
 
 const BookPage = props => {
-    const comics = useSelector(state => state.comics);
     const { state } = props.location;
-    const rating = Array.from({ length: 5 }, (_, y) =>
-        y < state.rating ? 1 : 0
-    );
+    const comics = useSelector(state => state.comics);
+    const loading = useSelector(state => state.loading);
+    const book = useSelector(state => state.book);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(requestBookData(state.isbn13));
+    }, [state.isbn13, dispatch]);
 
     if (!comics.length) {
         dispatch(requestApiData());
     }
-
     return (
         <>
             <Header />
@@ -43,104 +46,57 @@ const BookPage = props => {
                     </BackToCollection>
                 </Link>
 
-                <BookPageWrapper>
-                    <PrimaryImageWrapper>
-                        <img
-                            src={`${state.thumbnail.path}.${state.thumbnail.extension}`}
-                            alt="book"
-                        />
-                    </PrimaryImageWrapper>
+                {loading ? (
+                    <PendingWrapper>
+                        {Array(5)
+                            .fill(1)
+                            .map((_item, index) => {
+                                return <PlaceholderGrid key={index} />;
+                            })}
+                    </PendingWrapper>
+                ) : (
+                    <>
+                        <BookPageWrapper>
+                            <PrimaryImageWrapper>
+                                <img src={book.image} alt="book" />
+                            </PrimaryImageWrapper>
 
-                    <InfoWrapper>
-                        <div>
-                            <h2>{state.title}</h2>
+                            <InfoWrapper>
+                                <div>
+                                    <h2>{book.title}</h2>
 
-                            <div>
-                                {rating.map((x, i) =>
-                                    x ? (
-                                        <img
-                                            key={i}
-                                            src={FullStar}
-                                            alt="full star"
-                                        />
-                                    ) : (
-                                        <img
-                                            key={i}
-                                            src={EmptyStar}
-                                            alt="empty star"
-                                        />
-                                    )
-                                )}
-                            </div>
-                        </div>
+                                    <Rating rating={parseInt(book.rating)} />
+                                </div>
 
-                        <DescriptionWrapper>
-                            <div>
-                                Writer: <span>{state.writer}</span>
-                            </div>
-                            <div>
-                                Artist: <span>{state.artist}</span>
-                            </div>
-                            <div>
-                                Publication: <span>{state.publication}</span>
-                            </div>
-                            <div>
-                                Owner: <span>{state.owner}</span>
-                            </div>
-                        </DescriptionWrapper>
+                                <DescriptionWrapper>
+                                    <div>
+                                        Authors: <span>{book.authors}</span>
+                                    </div>
+                                    <div>
+                                        Year: <span>{book.year}</span>
+                                    </div>
+                                    <div>
+                                        Publisher: <span>{book.publisher}</span>
+                                    </div>
+                                    <div>
+                                        Price: <span>{book.price}</span>
+                                    </div>
+                                    <div>
+                                        ISBN: <span>{book.isbn13}</span>
+                                    </div>
+                                </DescriptionWrapper>
 
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Et consequuntur cupiditate obcaecati expedita
-                            quia, explicabo dolore reprehenderit delectus vero
-                            provident laborum suscipit sit eligendi eum,
-                            deserunt dignissimos? In enim tempora sed a quasi,
-                            dignissimos expedita blanditiis aspernatur eum,
-                            odit, odio dolores corrupti illo magni delectus
-                            itaque nesciunt natus atque repellat.
-                        </p>
+                                <p>{book.subtitle}</p>
 
-                        <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Voluptas doloremque enim rerum quis placeat
-                            laborum sequi accusamus commodi dicta. Sit officiis
-                            porro maxime esse maiores consequuntur corrupti quos
-                            rem unde neque laudantium sunt, dolores odio
-                            eligendi, eius minima nulla molestiae numquam.
-                            Nostrum, quia iusto labore eveniet consequatur nam
-                            aperiam itaque sunt quo adipisci eius iure tempora
-                            exercitationem voluptas pariatur eos nisi explicabo
-                            quis consequuntur, quae culpa quod ab? Laborum rem
-                            hic, nobis natus quod accusamus, soluta saepe earum
-                            sapiente minus eaque molestias amet rerum ipsam?
-                            Iure, atque corporis quibusdam fugiat inventore,
-                            assumenda excepturi officiis, debitis earum itaque
-                            at necessitatibus laboriosam!
-                        </p>
-                    </InfoWrapper>
-                </BookPageWrapper>
+                                <p>{book.desc}</p>
+                            </InfoWrapper>
+                        </BookPageWrapper>
 
-                <h2>Other Random Books</h2>
+                        <h2>Related Books</h2>
 
-                <ListWrapper>
-                    {shuffleArray(comics).map((x, i) => {
-                        return (
-                            <Link
-                                key={i}
-                                to={{
-                                    pathname: `${x.id}`,
-                                    state: x
-                                }}
-                            >
-                                <Book
-                                    image={x.thumbnail}
-                                    title={x.title}
-                                    owner={x.owner}
-                                />
-                            </Link>
-                        );
-                    })}
-                </ListWrapper>
+                        <BooksSlider comics={shuffleArray(comics)} />
+                    </>
+                )}
             </Wrapper>
         </>
     );
