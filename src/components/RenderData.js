@@ -1,10 +1,9 @@
 import React from "react";
+import BooksSlider from "./BooksSlider";
 import { PendingWrapper } from "../style/styles";
 import { filterPlainArray, getUniqueValues } from "./utils";
-import BooksSlider from "./BooksSlider";
 
-const RenderData = props => {
-    const { comics, criteria } = props;
+const RenderData = ({ comics, criteria }) => {
     const unique = getUniqueValues(comics, criteria);
     let heading, filters, filteredArray;
 

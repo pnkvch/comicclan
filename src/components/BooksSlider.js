@@ -10,8 +10,7 @@ const BooksSlider = ({ comics }) => {
                 <Link
                     key={index}
                     to={{
-                        pathname: `${comic.id}`,
-                        state: comic
+                        pathname: `${comic.isbn13}`
                     }}
                 >
                     <Book

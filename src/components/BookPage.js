@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     BookPageWrapper,
@@ -19,17 +19,21 @@ import { shuffleArray } from "./utils";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
-const BookPage = props => {
-    const { state } = props.location;
+const BookPage = ({ location }) => {
     const comics = useSelector(state => state.comics);
     const loading = useSelector(state => state.loading);
     const book = useSelector(state => state.book);
+    const count = useRef(0);
+
+    const isbn13 = location.pathname.slice(1, 14);
 
     const dispatch = useDispatch();
 
+    console.log("render: ", (count.current += 1));
+
     useEffect(() => {
-        dispatch(requestBookData(state.isbn13));
-    }, [state.isbn13, dispatch]);
+        dispatch(requestBookData(isbn13));
+    }, [isbn13, dispatch]);
 
     if (!comics.length) {
         dispatch(requestApiData());
