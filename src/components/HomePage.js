@@ -32,10 +32,12 @@ const HomePage = () => {
     const dispatch = useDispatch();
 
     useDebounceEffect(() => {
-        if (!comics.length || value) {
-            dispatch(requestApiData(value));
-            console.log(`dispatched ${value}`);
+        if (comics.length && value === "") {
+            return;
         }
+
+        dispatch(requestApiData(value));
+        console.log(`dispatched ${value}`);
     }, [value]);
 
     const handleButtonClick = e => {
