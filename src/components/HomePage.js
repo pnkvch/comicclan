@@ -22,10 +22,8 @@ const HomePage = () => {
     const [value, setValue] = useState("");
     const [criteria, setCriteria] = useState("title");
     const [buttonStyle, setButtonStyle] = useState({
-        year: true,
-        writer: false,
-        artist: false,
-        owner: false,
+        title: true,
+        price: false,
         random: false
     });
 
@@ -70,10 +68,8 @@ const HomePage = () => {
                 />
 
                 <ButtonWrapper onClick={handleButtonClick}>
-                    <Button prop={buttonStyle.year}>Title</Button>
-                    <Button prop={buttonStyle.writer}>Writer</Button>
-                    <Button prop={buttonStyle.artist}>Artist</Button>
-                    <Button prop={buttonStyle.owner}>Owner</Button>
+                    <Button prop={buttonStyle.title}>Title</Button>
+                    <Button prop={buttonStyle.price}>Price</Button>
                     <Button prop={buttonStyle.random}>Random</Button>
                 </ButtonWrapper>
 
