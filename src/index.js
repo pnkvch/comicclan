@@ -15,8 +15,8 @@ let storage = createStore(comicsReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-    <Provider store={storage}>
-        <App />
-    </Provider>,
-    document.getElementById("root")
+  <Provider store={storage}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
 );

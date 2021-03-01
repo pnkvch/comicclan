@@ -6,20 +6,20 @@ import { BackToCollection, Wrapper } from "../style/styles";
 import BookInformation from "./BookInformation";
 
 const BookPage = ({ book, comics }) => {
-    return (
-        <>
-            <Wrapper>
-                <Link to="/">
-                    <BackToCollection>
-                        <img src={BackIcon} alt="back" />
-                        Back to Collection
-                    </BackToCollection>
-                </Link>
+  return (
+    <>
+      <Wrapper>
+        <Link to="/">
+          <BackToCollection>
+            <img src={BackIcon} alt="back" />
+            Back to Collection
+          </BackToCollection>
+        </Link>
 
-                <BookInformation book={book} comics={comics} />
-            </Wrapper>
-        </>
-    );
+        <BookInformation book={book} comics={comics} />
+      </Wrapper>
+    </>
+  );
 };
 
 export default BookPage;

@@ -2,46 +2,46 @@ import React, { useEffect, useState } from "react";
 import { ProgressBarWrapper } from "../style/styles.js";
 
 const ProgressBar = () => {
-    const [scroll, setScroll] = useState(0);
+  const [scroll, setScroll] = useState(0);
 
-    const getDocumentHeight = () => {
-        return Math.max(
-            document.body.scrollHeight,
-            document.documentElement.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.offsetHeight,
-            document.body.clientHeight,
-            document.documentElement.clientHeight
-        );
-    };
+  const getDocumentHeight = () => {
+    return Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.body.clientHeight,
+      document.documentElement.clientHeight
+    );
+  };
 
-    const calculateScrollDistance = () => {
-        const currentScroll = window.pageYOffset;
-        const browserHeight = window.innerHeight;
-        const documentHeight = getDocumentHeight();
+  const calculateScrollDistance = () => {
+    const currentScroll = window.pageYOffset;
+    const browserHeight = window.innerHeight;
+    const documentHeight = getDocumentHeight();
 
-        const totalScrollLength = documentHeight - browserHeight;
-        const scrollPosition =
-            Math.floor((currentScroll / totalScrollLength) * 100 * 10) / 10;
+    const totalScrollLength = documentHeight - browserHeight;
+    const scrollPosition =
+      Math.floor((currentScroll / totalScrollLength) * 100 * 10) / 10;
 
-        setScroll(scrollPosition);
-    };
+    setScroll(scrollPosition);
+  };
 
-    const listenToScrollEvent = () => {
-        document.addEventListener("scroll", calculateScrollDistance);
-    };
+  const listenToScrollEvent = () => {
+    document.addEventListener("scroll", calculateScrollDistance);
+  };
 
-    const cancelListenToScrollEvent = () => {
-        document.removeEventListener("scroll", calculateScrollDistance);
-    };
+  const cancelListenToScrollEvent = () => {
+    document.removeEventListener("scroll", calculateScrollDistance);
+  };
 
-    useEffect(() => {
-        listenToScrollEvent();
+  useEffect(() => {
+    listenToScrollEvent();
 
-        return () => cancelListenToScrollEvent();
-    });
+    return () => cancelListenToScrollEvent();
+  });
 
-    return <ProgressBarWrapper scroll={`${scroll}%`} />;
+  return <ProgressBarWrapper scroll={`${scroll}%`} />;
 };
 
 export default ProgressBar;
