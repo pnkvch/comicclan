@@ -35,3 +35,8 @@ export const filterPlainArray = (array, filters) => {
     });
   });
 };
+export const sortComics = (arr, criteria) => {
+  return criteria === "random"
+    ? shuffleArray(arr)
+    : arr.sort(sortArrayByCriteria(criteria));
+};

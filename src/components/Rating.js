@@ -3,8 +3,12 @@ import EmptyStar from "../images/EmptyStar.svg";
 import FullStar from "../images/FullStar.svg";
 
 const Rating = props => {
-  const rating = { props };
   const ratingArray = [];
+  let { rating } = props;
+
+  if (!rating) {
+    rating = 1;
+  }
 
   for (let i = 0; i < 5; i++) {
     if (i < rating) {

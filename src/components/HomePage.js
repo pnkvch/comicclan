@@ -9,7 +9,6 @@ import {
   PendingWrapper
 } from "../style/styles";
 import { requestApiData } from "../actions";
-import { shuffleArray, sortArrayByCriteria } from "./utils";
 import { useDebounceEffect } from "./useDebounceEffect";
 import RenderData from "./RenderData";
 import Header from "./Header";
@@ -30,7 +29,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   useDebounceEffect(() => {
-    if (comics.length && value === "") {
+    if (comics?.length && value === "") {
       return;
     }
 
@@ -47,12 +46,6 @@ const HomePage = () => {
 
   const handleInputChange = e => {
     setValue(e.target.value);
-  };
-
-  const handlePass = arr => {
-    return criteria === "random"
-      ? shuffleArray(arr)
-      : arr.sort(sortArrayByCriteria(criteria));
   };
 
   return (
@@ -72,7 +65,6 @@ const HomePage = () => {
           <Button prop={buttonStyle.price}>Price</Button>
           <Button prop={buttonStyle.random}>Random</Button>
         </ButtonWrapper>
-
         {loading ? (
           <PendingWrapper>
             {Array(10)
@@ -82,7 +74,7 @@ const HomePage = () => {
               })}
           </PendingWrapper>
         ) : (
-          <RenderData comics={handlePass(comics)} criteria={criteria} />
+          <RenderData comics={comics} criteria={criteria} />
         )}
       </Wrapper>
     </HomeWrapper>

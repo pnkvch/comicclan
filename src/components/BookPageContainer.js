@@ -18,7 +18,7 @@ const BookPageContainer = ({ location }) => {
   console.log("render: ", (count.current += 1));
 
   useEffect(() => {
-    if (Object.keys(book).length === 0 || book.isbn13 !== isbn13) {
+    if (!book || book.isbn13 !== isbn13) {
       dispatch(requestBookData(isbn13));
     }
   }, [isbn13, dispatch, book]);
@@ -26,15 +26,16 @@ const BookPageContainer = ({ location }) => {
   if (!comics.length) {
     dispatch(requestApiData());
   }
+
+  if (loading) {
+    return <PendingWrapper>Loading...</PendingWrapper>;
+  }
+
   return (
     <>
       <Header />
 
-      {loading ? (
-        <PendingWrapper>Loading...</PendingWrapper>
-      ) : (
-        <BookPage book={book} comics={comics} />
-      )}
+      <BookPage book={book} comics={comics} />
     </>
   );
 };
