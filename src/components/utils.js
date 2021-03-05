@@ -17,17 +17,30 @@ export const sortArrayByCriteria = property => {
 };
 
 export const getUniqueValues = (arr, criteria) => {
-  const values = [];
+  let values = [],
+    uniqueValues;
   arr.forEach(x => values.push(x[criteria]));
-  const unique = values.filter((item, index, self) => {
+
+  if (criteria === "title") {
+    values = values.map(item => {
+      return item.charAt(0);
+    });
+  }
+
+  uniqueValues = values.filter((item, index, self) => {
     return self.indexOf(item) === index;
   });
 
-  return unique;
+  return uniqueValues;
 };
 
 export const filterPlainArray = (array, filters) => {
   const filterKeys = Object.keys(filters);
+  if (filterKeys[0] === "title") {
+    return array.filter(item => {
+      return item.title.charAt(0) === filters.title[0];
+    });
+  }
   return array.filter(item => {
     return filterKeys.every(key => {
       if (!filters[key].length) return true;
