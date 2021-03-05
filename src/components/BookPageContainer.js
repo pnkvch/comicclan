@@ -34,7 +34,6 @@ const BookPageContainer = ({ location }) => {
   return (
     <>
       <Header />
-
       <BookPage book={book} comics={comics} />
     </>
   );
