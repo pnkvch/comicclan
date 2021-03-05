@@ -225,8 +225,8 @@ export const DescriptionWrapper = styled.div`
 
 export const PendingWrapper = styled.div`
   font-size: 22px;
-  padding-top: 2em;
-
+  padding-top: ${props => (props.bookPage ? "4em" : "2em")};
+  padding-left: ${props => (props.bookPage ? "1em" : "0")};
   @media ${device.tablet} {
     font-size: 16px;
   }

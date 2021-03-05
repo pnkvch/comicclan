@@ -4,6 +4,7 @@ import { PendingWrapper } from "../style/styles";
 import { requestApiData, requestBookData } from "../actions";
 import BookPage from "./BookPage";
 import Header from "./Header";
+import PlaceholderGrid from "./PlaceholderGrid";
 
 const BookPageContainer = ({ location }) => {
   const comics = useSelector(state => state.comics);
@@ -28,7 +29,19 @@ const BookPageContainer = ({ location }) => {
   }
 
   if (loading) {
-    return <PendingWrapper>Loading...</PendingWrapper>;
+    return (
+      <>
+        <Header />
+
+        <PendingWrapper bookPage={true}>
+          {Array(10)
+            .fill(1)
+            .map((_item, index) => {
+              return <PlaceholderGrid key={index} />;
+            })}
+        </PendingWrapper>
+      </>
+    );
   }
 
   return (
