@@ -44,6 +44,7 @@ export const Button = styled.button`
     props.prop ? "#F15454" : primaryBackgroundColor};
   border-radius: 19px;
   padding: 0.5em;
+  min-width: 4.6em;
   width: fit-content;
   border: none;
   font-size: ${primaryFontSize};

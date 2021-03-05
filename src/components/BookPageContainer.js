@@ -18,7 +18,7 @@ const BookPageContainer = ({ location }) => {
   console.log("render: ", (count.current += 1));
 
   useEffect(() => {
-    if (!book || book.isbn13 !== isbn13) {
+    if (Object.keys(book).length === 0) {
       dispatch(requestBookData(isbn13));
     }
   }, [isbn13, dispatch, book]);
