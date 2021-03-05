@@ -44,7 +44,7 @@ export const Button = styled.button`
     props.prop ? "#F15454" : primaryBackgroundColor};
   border-radius: 19px;
   padding: 0.5em;
-  width: 4.6em;
+  width: fit-content;
   border: none;
   font-size: ${primaryFontSize};
   font-weight: bold;
@@ -242,4 +242,19 @@ export const ProgressBarWrapper = styled.div.attrs(({ scroll }) => ({
   z-index: 1;
   top: 63px;
   transition: width 0.1s ease-out;
+`;
+
+export const DownloadLink = styled.a`
+  color: white;
+  text-decoration: none;
+  background-color: #f15454;
+  border-radius: 19px;
+  padding: 0.5em;
+  width: fit-content;
+  border: none;
+  font-size: ${primaryFontSize};
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  margin-right: 0.5em;
 `;

@@ -3,13 +3,15 @@ import {
   BookPageWrapper,
   DescriptionWrapper,
   InfoWrapper,
-  PrimaryImageWrapper
+  PrimaryImageWrapper,
+  DownloadLink
 } from "../style/styles";
 import BooksSlider from "./BooksSlider";
 import Rating from "./Rating";
 import { shuffleArray } from "./utils";
 
 const BookInformation = props => {
+  let linkToPDF, state;
   const {
     image,
     title,
@@ -20,8 +22,14 @@ const BookInformation = props => {
     price,
     isbn13,
     subtitle,
-    desc
+    desc,
+    pdf
   } = props.book;
+
+  if (pdf) {
+    state = true;
+    linkToPDF = pdf[`Free eBook`];
+  }
 
   return (
     <>
@@ -53,6 +61,7 @@ const BookInformation = props => {
             <div>
               ISBN: <span>{isbn13}</span>
             </div>
+            {state && <DownloadLink href={linkToPDF}>Download</DownloadLink>}
           </DescriptionWrapper>
 
           <p>{subtitle}</p>

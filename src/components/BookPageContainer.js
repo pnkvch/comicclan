@@ -24,7 +24,7 @@ const BookPageContainer = ({ location }) => {
   }, [isbn13, dispatch, book]);
 
   if (!comics.length) {
-    dispatch(requestApiData());
+    dispatch(requestApiData(true));
   }
 
   if (loading) {
