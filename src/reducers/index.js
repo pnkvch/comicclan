@@ -11,12 +11,7 @@ let initialState = {
   loading: true
 };
 
-let flag;
-
 export let comicsReducer = (state = initialState, action) => {
-  if (typeof action.payload == "boolean") {
-    flag = true;
-  }
   switch (action.type) {
     case REQUEST_API_DATA:
       return {
@@ -25,13 +20,6 @@ export let comicsReducer = (state = initialState, action) => {
       };
 
     case RECEIVED_API_DATA:
-      if (flag) {
-        return {
-          ...state,
-          comics: action.payload,
-          loading: true
-        };
-      }
       return {
         ...state,
         comics: action.payload,
