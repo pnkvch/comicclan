@@ -1,32 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { PendingWrapper } from "../style/styles";
 import { requestApiData, requestBookData } from "../actions";
 import BookPage from "./BookPage";
 import Header from "./Header";
-import PlaceholderGrid from "./PlaceholderGrid";
+import { BookPlaceholderGrid, PlaceholderGrid } from "./PlaceholderGrid";
 
 const BookPageContainer = ({ location }) => {
   const comics = useSelector(state => state.comics);
   const loading = useSelector(state => state.loading);
   const book = useSelector(state => state.book);
-  const count = useRef(0);
 
   const isbn13 = location.pathname.slice(1, 14);
 
   const dispatch = useDispatch();
 
-  console.log("render: ", (count.current += 1));
-
   useEffect(() => {
+    if (!comics.length) {
+      dispatch(requestApiData());
+    }
     if (Object.keys(book).length === 0) {
       dispatch(requestBookData(isbn13));
     }
-  }, [isbn13, dispatch, book]);
-
-  if (!comics.length) {
-    dispatch(requestApiData(true));
-  }
+  }, [isbn13, dispatch, book, comics.length]);
 
   if (loading) {
     return (
@@ -34,9 +30,10 @@ const BookPageContainer = ({ location }) => {
         <Header />
 
         <PendingWrapper bookPage={true}>
-          {Array(10)
+          <BookPlaceholderGrid />
+          {Array(5)
             .fill(1)
-            .map((_item, index) => {
+            .map((_, index) => {
               return <PlaceholderGrid key={index} />;
             })}
         </PendingWrapper>

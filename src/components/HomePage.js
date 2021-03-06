@@ -12,7 +12,7 @@ import { requestApiData } from "../actions";
 import { useDebounceEffect } from "./useDebounceEffect";
 import RenderData from "./RenderData";
 import Header from "./Header";
-import PlaceholderGrid from "./PlaceholderGrid";
+import { PlaceholderGrid } from "./PlaceholderGrid";
 import ProgressBar from "./ProgressBar";
 
 const HomePage = () => {
@@ -32,9 +32,7 @@ const HomePage = () => {
     if (comics?.length && value === "") {
       return;
     }
-
     dispatch(requestApiData(value));
-    console.log(`dispatched ${value}`);
   }, [value]);
 
   const handleButtonClick = e => {

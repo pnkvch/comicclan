@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const PlaceholderGrid = props => (
+export const PlaceholderGrid = props => (
   <ContentLoader
     width={250}
     height={360}
@@ -17,4 +17,21 @@ const PlaceholderGrid = props => (
   </ContentLoader>
 );
 
-export default PlaceholderGrid;
+export const BookPlaceholderGrid = props => (
+  <ContentLoader
+    width={window.innerWidth}
+    height={410}
+    backgroundColor="#535353"
+    foregroundColor="#777777"
+    {...props}
+  >
+    <rect x="6" y="0" rx="10" ry="10" width="270" height="400" />
+    <rect x="350" y="0" rx="0" ry="0" width="250" height="10" />
+    <rect x="350" y="20" rx="0" ry="0" width="150" height="10" />
+    <rect x="350" y="40" rx="0" ry="0" width="160" height="10" />
+    <rect x="350" y="60" rx="0" ry="0" width="180" height="10" />
+    <rect x="350" y="80" rx="0" ry="0" width="140" height="10" />
+    <rect x="350" y="100" rx="0" ry="0" width="200" height="10" />
+    <rect x="350" y="120" rx="0" ry="0" width="130" height="10" />
+  </ContentLoader>
+);

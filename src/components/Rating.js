@@ -1,6 +1,7 @@
 import React from "react";
 import EmptyStar from "../images/EmptyStar.svg";
 import FullStar from "../images/FullStar.svg";
+import { RatingWrapper } from "../style/styles";
 
 const Rating = props => {
   const ratingArray = [];
@@ -20,6 +21,6 @@ const Rating = props => {
     }
   }
 
-  return <div>{ratingArray}</div>;
+  return <RatingWrapper>{ratingArray}</RatingWrapper>;
 };
 export default Rating;

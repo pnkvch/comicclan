@@ -97,7 +97,8 @@ export const ListWrapper = styled.div`
   a {
     color: ${primaryFontColor};
     text-decoration: none;
-    max-width: 225px;
+    min-width: 250px;
+    max-width: 250px;
     margin-right: 2em;
   }
 
@@ -258,4 +259,8 @@ export const DownloadLink = styled.a`
   outline: none;
   cursor: pointer;
   margin-right: 0.5em;
+`;
+
+export const RatingWrapper = styled.div`
+  min-width: 40%;
 `;
