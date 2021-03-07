@@ -5,19 +5,19 @@ import { requestBookData } from "../actions";
 import { ListWrapper } from "../style/styles";
 import Book from "./Book";
 
-const BooksSlider = ({ comics }) => {
+const BooksSlider = ({ books }) => {
   const dispatch = useDispatch();
   return (
     <ListWrapper>
-      {comics.map((comic, index) => (
+      {books.map((book, index) => (
         <Link
           key={index}
-          onClick={() => dispatch(requestBookData(comic.isbn13))}
+          onClick={() => dispatch(requestBookData(book.isbn13))}
           to={{
-            pathname: `${comic.isbn13}`
+            pathname: `${book.isbn13}`
           }}
         >
-          <Book image={comic.image} title={comic.title} owner={comic.isbn13} />
+          <Book image={book.image} title={book.title} owner={book.isbn13} />
         </Link>
       ))}
     </ListWrapper>

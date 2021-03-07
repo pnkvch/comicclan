@@ -7,8 +7,6 @@ export async function fetchData(query) {
     const response = await fetch(url).then(x => x.json());
     const results = response.books;
 
-    console.log(results);
-
     return results;
   } catch (e) {
     console.log(e);
@@ -21,7 +19,6 @@ export async function fetchBookData(query) {
   try {
     const response = await fetch(url).then(x => x.json());
     const results = response;
-    console.log(results);
 
     return results;
   } catch (e) {

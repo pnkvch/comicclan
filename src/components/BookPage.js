@@ -15,7 +15,7 @@ import BooksSlider from "./BooksSlider";
 import Rating from "./Rating";
 import { shuffleArray } from "./utils";
 
-const BookPage = ({ book, comics }) => {
+const BookPage = ({ book, books }) => {
   let linkToPDF,
     state = false;
   const {
@@ -85,7 +85,7 @@ const BookPage = ({ book, comics }) => {
 
         <h2>Related Books</h2>
 
-        <BooksSlider comics={shuffleArray(comics)} />
+        <BooksSlider books={shuffleArray(books)} />
       </Wrapper>
     </>
   );

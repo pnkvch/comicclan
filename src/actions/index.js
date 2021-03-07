@@ -2,8 +2,7 @@ export const REQUEST_API_DATA = "REQUEST_API_DATA";
 export const RECEIVED_API_DATA = "RECEIVED_API_DATA";
 export const REQUEST_BOOK_DATA = "REQUEST_BOOK_DATA";
 export const RECEIVED_BOOK_DATA = "RECEIVED_BOOK_DATA";
-export const NULLIFY_BOOK_STATE = "NULLIFY_BOOK_STATE";
-export const FILTER_DATA = "FILTER_DATA";
+export const CHANGE_CRITERIA = "CHANGE_CRITERIA";
 
 export const requestApiData = query => {
   return {
@@ -29,6 +28,13 @@ export const requestBookData = query => {
 export const receivedBookData = payload => {
   return {
     type: RECEIVED_BOOK_DATA,
+    payload
+  };
+};
+
+export const changeCriteria = payload => {
+  return {
+    type: CHANGE_CRITERIA,
     payload
   };
 };

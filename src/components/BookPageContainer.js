@@ -7,22 +7,22 @@ import Header from "./Header";
 import { BookPlaceholderGrid, PlaceholderGrid } from "./PlaceholderGrid";
 
 const BookPageContainer = ({ location }) => {
-  const comics = useSelector(state => state.comics);
-  const loading = useSelector(state => state.loading);
-  const book = useSelector(state => state.book);
+  const books = useSelector(state => state.dataReducer.books);
+  const loading = useSelector(state => state.dataReducer.loading);
+  const book = useSelector(state => state.dataReducer.book);
 
   const isbn13 = location.pathname.slice(1, 14);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!comics.length) {
+    if (!books.length) {
       dispatch(requestApiData());
     }
     if (Object.keys(book).length === 0) {
       dispatch(requestBookData(isbn13));
     }
-  }, [isbn13, dispatch, book, comics.length]);
+  }, [isbn13, dispatch, book, books.length]);
 
   if (loading) {
     return (
@@ -44,7 +44,7 @@ const BookPageContainer = ({ location }) => {
   return (
     <>
       <Header />
-      <BookPage book={book} comics={comics} />
+      <BookPage book={book} books={books} />
     </>
   );
 };

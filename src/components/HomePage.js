@@ -8,7 +8,7 @@ import {
   Wrapper,
   PendingWrapper
 } from "../style/styles";
-import { requestApiData } from "../actions";
+import { changeCriteria, requestApiData } from "../actions";
 import { useDebounceEffect } from "./useDebounceEffect";
 import RenderData from "./RenderData";
 import Header from "./Header";
@@ -16,20 +16,15 @@ import { PlaceholderGrid } from "./PlaceholderGrid";
 import ProgressBar from "./ProgressBar";
 
 const HomePage = () => {
-  const comics = useSelector(state => state.comics);
-  const loading = useSelector(state => state.loading);
+  const books = useSelector(state => state.dataReducer.books);
+  const loading = useSelector(state => state.dataReducer.loading);
+  const criteria = useSelector(state => state.criteriaReducer.criteria);
   const [value, setValue] = useState("");
-  const [criteria, setCriteria] = useState("title");
-  const [buttonStyle, setButtonStyle] = useState({
-    title: true,
-    price: false,
-    random: false
-  });
 
   const dispatch = useDispatch();
 
   useDebounceEffect(() => {
-    if (comics?.length && value === "") {
+    if (books?.length && value === "") {
       return;
     }
     dispatch(requestApiData(value));
@@ -37,9 +32,8 @@ const HomePage = () => {
 
   const handleButtonClick = e => {
     if (e.target.tagName.toLowerCase() === "button") {
-      setCriteria(e.target.innerText.toLowerCase());
+      dispatch(changeCriteria(e.target.innerText.toLowerCase()));
     }
-    setButtonStyle({ [e.target.innerText.toLowerCase()]: true });
   };
 
   const handleInputChange = e => {
@@ -59,9 +53,9 @@ const HomePage = () => {
         />
 
         <ButtonWrapper onClick={handleButtonClick}>
-          <Button prop={buttonStyle.title}>Title</Button>
-          <Button prop={buttonStyle.price}>Price</Button>
-          <Button prop={buttonStyle.random}>Random</Button>
+          <Button prop={criteria === "title"}>Title</Button>
+          <Button prop={criteria === "price"}>Price</Button>
+          <Button prop={criteria === "random"}>Random</Button>
         </ButtonWrapper>
         {loading ? (
           <PendingWrapper>
@@ -72,7 +66,7 @@ const HomePage = () => {
               })}
           </PendingWrapper>
         ) : (
-          <RenderData comics={comics} criteria={criteria} />
+          <RenderData books={books} criteria={criteria} />
         )}
       </Wrapper>
     </HomeWrapper>

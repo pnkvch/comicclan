@@ -2,9 +2,9 @@
 
 ### Description
 
-ComicClan, an online community of comic book enthusiasts, has contacted you to help them develop their new online library of comic books. The library will represent the combined collection of comic books owned by the community members.
+ComicClan, an applica tion, used to parse the book API: [https://api.itbook.store/1.0/](https://api.itbook.store/1.0/). The library will represent the collection of books, stored in the mentioned API.
 
-### Quick Overview
+### Run locally
 
 To install the dependencies needed run:<br>
 `yarn add` or `npm install`<br>
@@ -24,6 +24,7 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.
 
 - [React](https://reactjs.org/)
 - [ReactRouter](https://reacttraining.com/react-router/web/guides/quick-start)
-- [styled-components](https://www.styled-components.com/).
+- [styled-components](https://www.styled-components.com/)
 - [Redux](https://redux.js.org/)
-- [Redux Saga](https://redux-saga.js.org/).
+- [Redux Saga](https://redux-saga.js.org/)
+- [React Content Loader](https://github.com/danilowoz/react-content-loader)
