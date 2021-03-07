@@ -14,18 +14,16 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.
 
 ### Specifications
 
--   The application allows the following grouping categories:
-    -   Year (default)
-    -   Writer
-    -   Artist
-    -   Owner
-    -   Random
--   The application allows searching for comic books based on a name (or partial name).
+- The application allows the following grouping categories:
+  - Title (default)
+  - Price
+  - Random
+- The application allows searching for comic books based on a name (or partial name).
 
 ### Technologies used:
 
--   [React](https://reactjs.org/)
--   [ReactRouter](https://reacttraining.com/react-router/web/guides/quick-start)
--   [styled-components](https://www.styled-components.com/).
--   [Redux](https://redux.js.org/)
--   [Redux Saga](https://redux-saga.js.org/).
+- [React](https://reactjs.org/)
+- [ReactRouter](https://reacttraining.com/react-router/web/guides/quick-start)
+- [styled-components](https://www.styled-components.com/).
+- [Redux](https://redux.js.org/)
+- [Redux Saga](https://redux-saga.js.org/).
